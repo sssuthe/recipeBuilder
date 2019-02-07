@@ -1,3 +1,5 @@
+This is a project that is built via Max's course on Udemy.  Please keep in mind that though this is from a course, I wrote it and improvised along the way.
+
 # RecipeBuilder
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
