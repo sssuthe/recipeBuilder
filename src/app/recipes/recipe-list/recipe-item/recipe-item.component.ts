@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../../recipe.model';
 
 @Component({
@@ -8,10 +8,15 @@ import { Recipe } from '../../recipe.model';
 })
 export class RecipeItemComponent implements OnInit {
   @Input() recipeItem: {recipe: Recipe};//need @input() here to expose this as a bindable/setable property, recipe-list.component will set this
+  @Output() recipeItemSelected = new EventEmitter<{recipe: Recipe}>();//need to decorate with output so we can expose this event outward
+
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onRecipeItemClicked(){
+    this.recipeItemSelected.emit(this.recipeItem);
+  }
 }
