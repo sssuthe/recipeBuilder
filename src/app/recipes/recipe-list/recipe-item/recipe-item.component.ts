@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Recipe } from '../../recipe.model';
+import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -7,16 +8,14 @@ import { Recipe } from '../../recipe.model';
   styleUrls: ['./recipe-item.component.css']
 })
 export class RecipeItemComponent implements OnInit {
-  @Input() recipeItem: {recipe: Recipe};//need @input() here to expose this as a bindable/setable property, recipe-list.component will set this
-  @Output() recipeItemSelected = new EventEmitter<{recipe: Recipe}>();//need to decorate with output so we can expose this event outward
+  @Input() recipe: Recipe;//need @input() here to expose this as a bindable/setable property, recipe-list.component will set this
 
-
-  constructor() { }
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
   }
 
   onRecipeItemClicked(){
-    this.recipeItemSelected.emit(this.recipeItem);
+    this.recipeService.recipeSelected.emit(this.recipe);
   }
 }
