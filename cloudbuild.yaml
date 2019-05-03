@@ -9,8 +9,6 @@ steps:
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
   - 'CLOUDSDK_CONTAINER_CLUSTER=shark-cluster'
-  options:
-    machineType: 'N1_HIGHCPU_8'
 timeout: 660s
 tags: ['mytag1', 'mytag2']
 images: ['gcr.io/sharkops/recipebuilderimage']
