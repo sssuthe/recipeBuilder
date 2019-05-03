@@ -5,7 +5,7 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/sharkops-239501/recipe-builder-image']
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['set', 'image', 'deployment/shark-deployment', 'shark-container=gcr.io/sharkops-239501/recipe-builder-image']
+  args: ['set', 'image', 'deployment/shark-deployment', 'recipe-builder-image=gcr.io/sharkops-239501/recipe-builder-image']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
   - 'CLOUDSDK_CONTAINER_CLUSTER=shark-cluster-2'
