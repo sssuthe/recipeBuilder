@@ -6,6 +6,9 @@ steps:
   args: ['push', 'gcr.io/sharkops-239501/recipe-builder-image:v2']
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['run', 'shark-ops-deployment', '--image=gcr.io/sharkops-239501/recipe-builder-image:v2', '--port=8080']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=shark-ops-cluster'
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['expose', 'deployment', 'shark-ops-deployment', '--type=LoadBalancer', '--port=80', '--target-port=8080']
 timeout: 660s
