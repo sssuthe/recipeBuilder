@@ -4,9 +4,8 @@ steps:
   timeout: 500s
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/sharkops-239501/recipe-builder-image:v2']
-- name: 'gcr.io/cloud-builders/kubectl'
+- name: 'gcr.io/cloud-builders/gcloud'
   args: ['container', 'clusters', 'create', 'shark-ops-cluster', '--num-nodes=2']
-  env: ['CLOUDSDK_COMPUTE_ZONE=<us-east4-b>', 'CLOUDSDK_CONTAINER_CLUSTER=<shark-ops-cluster>', 'GCLOUD_PROJECT=<sharkops-239501>']
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['run', 'shark-ops-deployment', '--image=gcr.io/sharkops-239501/recipe-builder-image:v2', '--port 8080']
 - name: 'gcr.io/cloud-builders/kubectl'
