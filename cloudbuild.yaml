@@ -1,14 +1,22 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/sharkops-239501/recipe-builder-image', '.']
+  args: ['build', '-t', 'gcr.io/sharkops-239501/recipe-builder-image:v2', '.']
   timeout: 500s
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/sharkops-239501/recipe-builder-image']
+  args: ['push', 'gcr.io/sharkops-239501/recipe-builder-image:v2']
+
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['set', 'image', 'deployment/shark-deployment', 'nginx=gcr.io/sharkops-239501/recipe-builder-image']
+  args: ['container', 'clusters', 'create', 'shark-ops-cluster', '--num-nodes=2']
+
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['run', 'shark-ops-deployment', '--image=gcr.io/sharkops-239501/recipe-builder-image:v2', '--port 8080']
+
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['expose', 'deployment', 'shark-ops-deployment', '--type=LoadBalancer', '--port 80', '--target-port 8080']
+
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
   - 'CLOUDSDK_CONTAINER_CLUSTER=shark-cluster-2'
 timeout: 660s
 tags: ['mytag1', 'mytag2']
-images: ['gcr.io/sharkops-239501/recipe-builder-image']
+images: ['gcr.io/sharkops-239501/recipe-builder-image:v2']
