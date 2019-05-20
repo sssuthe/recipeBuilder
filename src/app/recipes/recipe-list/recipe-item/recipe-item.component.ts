@@ -1,6 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Recipe } from '../../recipe.model';
-import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -8,14 +7,8 @@ import { RecipeService } from 'src/app/services/recipe.service';
   styleUrls: ['./recipe-item.component.css']
 })
 export class RecipeItemComponent implements OnInit {
-  @Input() recipe: Recipe;//need @input() here to expose this as a bindable/setable property, recipe-list.component will set this
+ @Input() recipe: Recipe;
+ @Input() index: number;
 
-  constructor(private recipeService: RecipeService) { }
-
-  ngOnInit() {
-  }
-
-  onRecipeItemClicked(){
-    this.recipeService.recipeSelected.emit(this.recipe);
-  }
+  ngOnInit(){}
 }

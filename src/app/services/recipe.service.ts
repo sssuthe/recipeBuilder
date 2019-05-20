@@ -41,4 +41,8 @@ export class RecipeService {
   getRecipes(){
     return this.recipes.slice();//by returning what's returned from slice we get a copy of the collection and not a direct reference
   }
+
+  getRecipe(index: number): Recipe {
+    return this.recipes.slice()[index];
+  }
 }
